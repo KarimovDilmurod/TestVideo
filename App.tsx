@@ -1,24 +1,31 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Player2} from './src/components/VideoControl';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import HomeScreen from './src/screens/Home/HomeScreen';
+import PlayerScreen from './src/screens/Player/PlayerScreen';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Player2 />
-    </View>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomeScreen} />
+
+            <Stack.Screen
+              name="Player"
+              options={{headerShown: false}}
+              component={PlayerScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-  },
-  text: {
-    backgroundColor: 'blue',
-  },
-});
 
 export default App;
