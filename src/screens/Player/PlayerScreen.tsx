@@ -18,7 +18,7 @@ const PlayerScreen = ({route}: IProps) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Player key={data.id} url={data.video} />
+      <Player url={data.sources} />
     </SafeAreaView>
   );
 };

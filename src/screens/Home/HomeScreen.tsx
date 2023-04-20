@@ -20,7 +20,7 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         data={videoList}
         keyExtractor={(item, index) => item.toString() + index}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <TouchableOpacity
             onPress={() =>
               // @ts-ignore
@@ -28,11 +28,22 @@ const HomeScreen = () => {
             }
             activeOpacity={0.7}
             style={styles.itemContent}
-            key={item.id}>
+            key={index}>
             <Text style={styles.text}>{item.title}</Text>
 
             <View style={styles.imageContent}>
-              <Image source={item.image} style={styles.image} />
+              <Image
+                source={{
+                  uri:
+                    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/' +
+                    item.thumb,
+                }}
+                style={styles.image}
+              />
+            </View>
+
+            <View style={styles.subTitleContent}>
+              <Text style={styles.subTitle}>{item.description}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -50,7 +61,6 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    width: 100,
     color: 'black',
     fontSize: 20,
     paddingHorizontal: 10,
@@ -78,6 +88,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     borderRadius: 8,
+  },
+  subTitle: {
+    color: 'black',
+  },
+  subTitleContent: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
 });
 
